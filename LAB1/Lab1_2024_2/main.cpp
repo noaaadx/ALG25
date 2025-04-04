@@ -28,7 +28,7 @@ int main(int argc, char** argv) {
 
 void test01(char *arrLetras, int nLetras){
     //cantidad de combinaciones
-    char patron[cantBuscada] = {'A', 'L', 'A'};
+    char patron[cantBuscada] = {'G', 'O', 'L'};
     int cantCombinaciones = ((int)pow(2, nLetras)) - 1;
     //crear cromosoma
     bool validado;
@@ -77,9 +77,9 @@ bool validarCromosoma(int *cromosoma, char *arrLetras, char *patron, int nLetras
             bool letraEncontrada = false;
             for(int i=0; i<posicion; i++){
                 if(patron[h] == palabra[i]){
-                    palabra[i] = ' ';
+                    palabra[i] = '*';
                     letraEncontrada = true;
-                    cout<<palabra[i]<<endl;
+                    break;
                 }
             }
             if(!letraEncontrada)return false;
