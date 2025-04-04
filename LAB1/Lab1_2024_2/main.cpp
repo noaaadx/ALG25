@@ -7,7 +7,10 @@
 
 #include <iostream>
 #include <cmath>
+#include <cstring>
 using namespace std;
+#define cantBuscada 3
+
 //definimos headers
 void llenarCromosoma(int *cromosoma, int nLetras, int combinacion);
 bool validarCromosoma(int *cromosoma,char *arrLetras,char *patron,int nLetras);
@@ -25,7 +28,7 @@ int main(int argc, char** argv) {
 
 void test01(char *arrLetras, int nLetras){
     //cantidad de combinaciones
-    char patron[3] = {'G', 'O', 'L'};
+    char patron[cantBuscada] = {'A', 'L', 'A'};
     int cantCombinaciones = ((int)pow(2, nLetras)) - 1;
     //crear cromosoma
     bool validado;
@@ -35,10 +38,12 @@ void test01(char *arrLetras, int nLetras){
         
         //validarCromosomaCorrecto
         validado =validarCromosoma(cromosoma,arrLetras, patron, nLetras);
-        if(validado)posible++;
-    }
-    cout<<posible;
-    
+        //encontró la combinacion con la palabra GOL
+        if(validado){
+            posible++;
+        }
+    }    
+           cout<<posible;
 }
 
 void llenarCromosoma(int *cromosoma, int nLetras, int combinacion){
@@ -51,23 +56,33 @@ void llenarCromosoma(int *cromosoma, int nLetras, int combinacion){
 }
 
 bool validarCromosoma(int *cromosoma, char *arrLetras, char *patron, int nLetras){
-    int cantLetras = 0, cant = 0;
+    int cantLetras = 0, posicion = 0;
+    char palabra[4] = {}, buffer[cantBuscada] = {};
     for(int i=0; i<nLetras ; i++){
-        if(cromosoma[i] == 1) cantLetras++;
+        if(cromosoma[i] == 1)cantLetras++;
     }
-    if(cantLetras != 3)return false;
-    if(cantLetras == 3){
+    if(cantLetras != 3){
+        return false;
+    }else{
         for(int i=0; i<nLetras; i++){
             if(cromosoma[i] == 1){
-                for(int j=0; j<3; j++){
-                    if(arrLetras[i] == patron[j]){
-                        validado = true;
-                        break;
-                    }
-                }
-                validado = false;
+                //meter las combinaciones de 1 en un char especifico
+                palabra[posicion] = arrLetras[i];
+                posicion++;
             }
-            if(!validado) return false;
+        }
+        //realizamos la comparativa con el patron
+        //va a jugar con cada posicion del patron
+        for(int h=0; h<cantBuscada; h++){
+            bool letraEncontrada = false;
+            for(int i=0; i<posicion; i++){
+                if(patron[h] == palabra[i]){
+                    palabra[i] = ' ';
+                    letraEncontrada = true;
+                    cout<<palabra[i]<<endl;
+                }
+            }
+            if(!letraEncontrada)return false;
         }
     }
     return true; 
