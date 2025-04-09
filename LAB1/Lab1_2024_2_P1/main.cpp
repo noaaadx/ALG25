@@ -9,7 +9,7 @@
 #include <cmath>
 #include <cstring>
 using namespace std;
-#define cantBuscada 3
+#define cantBuscada 4
 
 //definimos headers
 void llenarCromosoma(int *cromosoma, int nLetras, int combinacion);
@@ -28,7 +28,11 @@ int main(int argc, char** argv) {
 
 void test01(char *arrLetras, int nLetras){
     //cantidad de combinaciones
+<<<<<<< HEAD:LAB1/Lab1_2024_2_P1/main.cpp
+    char patron[cantBuscada] = {'G', 'A', 'L', 'A'};
+=======
     char patron[cantBuscada] = {'G', 'O', 'L'};
+>>>>>>> 7d8114a0e5db02a3c9fdeca1b364c9151e489784:LAB1/Lab1_2024_2/main.cpp
     int cantCombinaciones = ((int)pow(2, nLetras)) - 1;
     //crear cromosoma
     bool validado;
@@ -61,7 +65,7 @@ bool validarCromosoma(int *cromosoma, char *arrLetras, char *patron, int nLetras
     for(int i=0; i<nLetras ; i++){
         if(cromosoma[i] == 1)cantLetras++;
     }
-    if(cantLetras != 3){
+    if(cantLetras != cantBuscada){
         return false;
     }else{
         for(int i=0; i<nLetras; i++){
@@ -77,7 +81,11 @@ bool validarCromosoma(int *cromosoma, char *arrLetras, char *patron, int nLetras
             bool letraEncontrada = false;
             for(int i=0; i<posicion; i++){
                 if(patron[h] == palabra[i]){
+<<<<<<< HEAD:LAB1/Lab1_2024_2_P1/main.cpp
+                    palabra[i] = i;
+=======
                     palabra[i] = '*';
+>>>>>>> 7d8114a0e5db02a3c9fdeca1b364c9151e489784:LAB1/Lab1_2024_2/main.cpp
                     letraEncontrada = true;
                     break;
                 }
